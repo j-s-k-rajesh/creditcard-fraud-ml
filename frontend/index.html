@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Card Fraud Detection System</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>💳 Credit Card Fraud Detection</h1>
+            <p>
+                This system uses Machine Learning to detect fraudulent
+                credit card transactions based on transaction patterns.
+            </p>
+        </header>
+         <div class="metrics-container">
+
+        <div class="metric-card">
+            <h3>ROC AUC Score</h3>
+            <p class="metric-value">91%</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Fraud Recall</h3>
+            <p class="metric-value">83%</p>
+        </div>
+
+        <div class="metric-card">
+            <h3>Confusion Matrix</h3>
+            <div class="confusion-matrix">
+                <div>56864</div>
+                <div>0</div>
+                <div>17</div>
+                <div>81</div>
+            </div>
+        </div>
+
+    </div>
+
+        <section class="upload-section">
+            <h2>Upload Transaction CSV File</h2>
+
+            <p class="instructions">
+                📌 The CSV must contain columns: Time, V1–V28, Amount  
+                📌 Do NOT include the "Class" column  
+                📌 Click Predict to analyze transactions
+            </p>
+
+            <input type="file" id="fileInput" />
+            <button onclick="uploadFile()">🚀 Run Prediction</button>
+        </section>
+
+        <section class="results-section">
+            <h2>Prediction Results</h2>
+            <div id="result"></div>
+        </section>
+
+        <footer>
+            <p>Built with Flask + Machine Learning + JavaScript</p>
+        </footer>
+
+    </div>
+
+<script src="script.js"></script>
+</body>
+</html>
