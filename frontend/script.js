@@ -16,7 +16,7 @@ async function uploadFile() {
 
     try {
 
-        fetch("https://creditcard-fraud-ml.onrender.com/predict", {
+        fetch("https://creditcard-fraud-ml.onrender/predict.com", {
             method: "POST",
             body: formData
         });
