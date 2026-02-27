@@ -1,4 +1,5 @@
 async function uploadFile() {
+
     const fileInput = document.getElementById("fileInput");
     const resultDiv = document.getElementById("result");
 
@@ -10,6 +11,8 @@ async function uploadFile() {
     const formData = new FormData();
     formData.append("file", fileInput.files[0]);
 
+    resultDiv.innerHTML = "<div class='loading'>⏳ Processing... Please wait.</div>";
+
     try {
         const response = await fetch(
             "https://creditcard-fraud-ml.onrender.com/predict",
@@ -18,33 +21,6 @@ async function uploadFile() {
                 body: formData
             }
         );
-
-        if (!response.ok) {
-            throw new Error("Server error");
-        }
-
-        const data = await response.json();
-
-        resultDiv.innerHTML = JSON.stringify(data, null, 2);
-
-    } catch (error) {
-        resultDiv.innerHTML =
-            `<p style="color:red;">Error: ${error.message}</p>`;
-    }
-}
-
-    const formData = new FormData();
-    formData.append("file", file);
-
-    const resultDiv = document.getElementById("result");
-    resultDiv.innerHTML = "<div class='loading'>⏳ Processing... Please wait.</div>";
-
-    try {
-
-        fetch("https://creditcard-fraud-ml.onrender/predict.com", {
-            method: "POST",
-            body: formData
-        });
 
         if (!response.ok) {
             throw new Error("Server error");
@@ -71,15 +47,14 @@ function displayTable(data) {
     let tableHTML = "<div class='table-container'>";
     tableHTML += "<table class='result-table'><tr>";
 
-    // Headers
     const keys = Object.keys(data[0]);
+
     keys.forEach(key => {
         tableHTML += `<th>${key}</th>`;
     });
 
     tableHTML += "</tr>";
 
-    // Rows
     data.forEach(row => {
 
         if (row["Prediction"] == 1) fraudCount++;
@@ -96,7 +71,6 @@ function displayTable(data) {
 
     tableHTML += "</table></div>";
 
-    // Summary Section
     const summaryHTML = `
         <div class="summary">
             <h3>📊 Prediction Summary</h3>
