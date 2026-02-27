@@ -1,12 +1,37 @@
 async function uploadFile() {
-
     const fileInput = document.getElementById("fileInput");
-    const file = fileInput.files[0];
+    const resultDiv = document.getElementById("result");
 
-    if (!file) {
-        alert("Please select a CSV file.");
+    if (!fileInput.files.length) {
+        resultDiv.innerHTML = "<p style='color:red;'>Please select a file.</p>";
         return;
     }
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    try {
+        const response = await fetch(
+            "https://creditcard-fraud-ml.onrender.com/predict",
+            {
+                method: "POST",
+                body: formData
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Server error");
+        }
+
+        const data = await response.json();
+
+        resultDiv.innerHTML = JSON.stringify(data, null, 2);
+
+    } catch (error) {
+        resultDiv.innerHTML =
+            `<p style="color:red;">Error: ${error.message}</p>`;
+    }
+}
 
     const formData = new FormData();
     formData.append("file", file);
