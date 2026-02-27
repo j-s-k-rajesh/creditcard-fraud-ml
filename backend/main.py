@@ -34,9 +34,11 @@ def predict():
     original_data["Prediction"] = predictions
 
     # Convert to JSON
-    result = original_data.to_dict(orient="records")
+    predictions = original_data.to_dict(orient="records")
 
-    return jsonify(result)
+    return jsonify({
+    "predictions": predictions.tolist()
+    })
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
